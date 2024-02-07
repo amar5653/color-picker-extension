@@ -50,10 +50,11 @@ header span a{
 .all-colors .color{
     display:flex;
     gap:2px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 .all-colors .color .rect {
     width:22px;
     height:22px;
-    background-color: #FF5688;
     border-radius: 5px;
 }
