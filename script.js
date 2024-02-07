@@ -12,6 +12,9 @@ const copyColor = elem => {
 }
 
 const showColors = () => {
+
+  if(!pickedColors.length) return; //Returning if there are no picked colors
+
   const liTag = pickedColors
     .map((color) => 
       `<li class="color">
@@ -23,6 +26,8 @@ const showColors = () => {
     .join("");
      allColors.innerHTML = liTag;
 
+     document.querySelector(".picked-colors").classList.remove("hide");
+
      // Add a click event listener to each element to copy the color code
      const color = document.querySelectorAll(".color");
      color.forEach(li => {
@@ -32,7 +37,10 @@ const showColors = () => {
 };
 showColors();
 
-const activateEyeDropper = async () => {
+const activateEyeDropper = () => {
+ document.body.style.display = "none";
+ 
+ setTimeout( async () => {
   try {
     //open eye dropper and getting the selected color
     const eyeDropper = new EyeDropper();
@@ -47,9 +55,18 @@ const activateEyeDropper = async () => {
     }
 
   } catch (error) {
-    console.log(error);
+    console.log("failed to copy the color code");
   }
+}, 10);
+  document.body.style.display = "block";
 };
 
+//clearing all picked colors, updating local storage, hiding the picked colors element
+const clearAllColors = () => {
+ pickedColors.length = 0;
+ localStorage.setItem("picked-colors",JSON.stringify(pickedColors));
+ document.querySelector(".picked-colors").classList.add("hide");
+}
+
 colorPickerBtn.addEventListener("click", activateEyeDropper);
-//clearBtn.addEventListener("click", clearData());
+clearBtn.addEventListener("click", clearAllColors());

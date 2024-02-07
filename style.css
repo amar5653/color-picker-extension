@@ -31,10 +31,18 @@
    outline:none;
    cursor: pointer;
 }
+.picked-colors {
+width:100%;
+margin: 10px 15px;
+}
+.picked-colors.hide{
+    display: none;
+}
 header {
     display: flex;
     justify-content: space-between;
     width:100%;
+
 }
 header span a{
     color:rgb(13, 25, 159);
